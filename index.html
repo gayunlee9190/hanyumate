@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="맥락 기반 중국어 학습을 돕는 교육용 번역 학습 플랫폼" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>나만의 중국어 AI 친구</title>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ════════ 좌측 사이드바 ════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark">朋</span>
+      <span class="brand-name">중국어 AI 친구</span>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item nav-item--active" data-view="learn">📝 학습하기</button>
+      <button class="nav-item" data-view="notes">⭐ 학습 노트</button>
+      <button class="nav-item" data-view="culture">🏮 Z세대 표현</button>
+    </nav>
+
+    <div class="sidebar-stat">
+      <div class="sidebar-stat-label">오늘 학습 진행률</div>
+      <div class="progress">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="sidebar-stat-num"><span id="progressText">0</span> / 5 문장</div>
+    </div>
+
+    <div class="sidebar-foot">
+      <button class="theme-toggle" id="themeToggle">🌙 다크모드</button>
+      <p class="sidebar-note">맥락 기반 중국어 학습<br/>탐구 프로젝트</p>
+    </div>
+  </aside>
+
+  <!-- 모바일 상단바 -->
+  <div class="topbar">
+    <button class="topbar-menu" id="menuBtn">☰</button>
+    <span class="topbar-title">중국어 AI 친구</span>
+    <button class="theme-toggle theme-toggle--mini" id="themeToggleMini">🌙</button>
+  </div>
+
+  <!-- ════════ 중앙 메인 영역 ════════ -->
+  <main class="main">
+
+    <!-- ===== 학습하기 뷰 ===== -->
+    <section class="view view--active" id="view-learn">
+      <header class="page-head">
+        <h1 class="page-title">학습하기</h1>
+        <p class="page-sub">단순 번역이 아니라, <strong>왜 그렇게 말하는지</strong>까지 배우는 중국어 도우미</p>
+      </header>
+
+      <!-- 오늘의 중국어 + 통계 미니 카드 -->
+      <div class="mini-grid">
+        <div class="mini-card mini-card--today">
+          <div class="mini-card-label">📅 오늘의 중국어</div>
+          <div class="mini-today-cn" id="todayCn">加油！</div>
+          <div class="mini-today-py" id="todayPy">Jiāyóu!</div>
+          <div class="mini-today-ko" id="todayKo">힘내! / 파이팅!</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-label">📊 학습한 문장</div>
+          <div class="mini-card-num" id="statLearned">0</div>
+          <div class="mini-card-foot">누적 분석 횟수</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-label">⭐ 저장한 표현</div>
+          <div class="mini-card-num" id="statSaved">0</div>
+          <div class="mini-card-foot">학습 노트에 보관</div>
+        </div>
+      </div>
+
+      <!-- 입력 카드 -->
+      <div class="input-card">
+        <div class="direction-row">
+          <button type="button" class="direction-btn direction-btn--active" data-dir="ko2cn">한국어 → 중국어</button>
+          <button type="button" class="direction-btn" data-dir="cn2ko">중국어 → 한국어</button>
+        </div>
+
+        <div class="field-label">📝 학습할 문장을 입력해 보세요</div>
+        <textarea id="inputText" class="input-textarea"
+          placeholder="예) 밥 먹었어? / 감사합니다 / 주말에 같이 영화 볼래?"></textarea>
+
+        <div class="situation-label">💬 어떤 상황에서 쓸 말인가요?</div>
+        <div class="situation-grid" id="situationGrid">
+          <button type="button" class="situation-btn situation-btn--active" data-situ="friend">🧑‍🤝‍🧑 친구</button>
+          <button type="button" class="situation-btn" data-situ="school">🎓 발표</button>
+          <button type="button" class="situation-btn" data-situ="travel">🧳 여행</button>
+          <button type="button" class="situation-btn" data-situ="sns">💬 SNS</button>
+          <button type="button" class="situation-btn" data-situ="formal">📄 공식</button>
+        </div>
+
+        <button class="submit-btn" id="submitBtn">학습 분석 받기</button>
+        <p class="input-hint">입력하면 단계별 분석 후, 9가지 학습 항목으로 정리됩니다</p>
+      </div>
+
+      <!-- 결과 영역 -->
+      <div class="results-area" id="results">
+        <div class="empty-state">
+          <span class="empty-state-icon">🍵</span>
+          문장을 입력하고 <strong>학습 분석 받기</strong>를 눌러보세요.<br/>
+          AI 친구가 단계별로 분석해서 학습 피드백을 정리해 드려요.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 학습 노트 뷰 ===== -->
+    <section class="view" id="view-notes">
+      <header class="page-head">
+        <h1 class="page-title">학습 노트</h1>
+        <p class="page-sub">저장한 표현과 북마크를 한곳에서 복습하세요</p>
+      </header>
+      <div class="notes-list" id="notesList"></div>
+    </section>
+
+    <!-- ===== Z세대 표현 뷰 ===== -->
+    <section class="view" id="view-culture">
+      <header class="page-head">
+        <h1 class="page-title">중국 Z세대 · SNS 표현</h1>
+        <p class="page-sub">교과서엔 없지만 실제로 가장 많이 쓰는 신조어와 인터넷 표현</p>
+      </header>
+      <div class="slang-grid" id="slangGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- ════════ 우측 학습 패널 ════════ -->
+  <aside class="panel" id="panel">
+    <div class="panel-block">
+      <div class="panel-title">🕘 최근 번역 기록</div>
+      <div class="panel-body" id="recentList">
+        <div class="panel-empty">아직 기록이 없어요</div>
+      </div>
+    </div>
+
+    <div class="panel-block">
+      <div class="panel-title">⚠️ 자주 틀리는 표현</div>
+      <div class="panel-body" id="commonErrors"></div>
+    </div>
+
+    <div class="panel-block">
+      <div class="panel-title">💡 추천 중국어 표현</div>
+      <div class="panel-body" id="recommendPanel"></div>
+    </div>
+  </aside>
+
+  <!-- 모바일 사이드바 오버레이 -->
+  <div class="overlay" id="overlay"></div>
+</div>
+
+<!-- 토스트 알림 -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
