@@ -549,6 +549,64 @@ textarea { font-family: inherit; }
 .slang-desc { font-size: 0.84rem; color: var(--ink-soft); margin-top: 5px; line-height: 1.55; }
 .slang-foot { display: flex; gap: 6px; margin-top: 12px; }
 
+/* ════════ API 키 입력 배너 (direct 모드) ════════ */
+.api-banner {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  animation: cardUp .35s ease both;
+}
+.api-banner-text { font-size: 0.84rem; color: var(--warn-text); margin-bottom: 10px; line-height: 1.5; }
+.api-banner-row { display: flex; gap: 8px; }
+.api-key-input {
+  flex: 1;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+.api-key-input:focus { outline: none; border-color: var(--mint-deep); }
+.api-key-btn {
+  border: none;
+  background: var(--mint-deep);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.api-key-btn:hover { background: #5e9b85; }
+.api-banner--ok { background: #eef6f1; border-color: var(--mint-deep); }
+[data-theme="dark"] .api-banner--ok { background: #2f3f37; }
+.api-banner--ok .api-banner-text { color: var(--mint-text); }
+
+/* 결과 영역 에러 박스 */
+.error-box {
+  background: var(--red-soft);
+  border: 1px solid var(--red-text);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  color: var(--red-text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  animation: cardUp .35s ease both;
+}
+.error-box-title { font-weight: 700; margin-bottom: 6px; }
+.error-box-retry {
+  margin-top: 12px;
+  border: 1px solid var(--red-text);
+  background: transparent;
+  color: var(--red-text);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 /* ════════ 토스트 ════════ */
 .toast {
   position: fixed;
