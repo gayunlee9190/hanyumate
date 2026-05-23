@@ -24,6 +24,8 @@
    ──────────────────────────────────────────────── */
 
 const CONFIG = {
+  MODE: 'direct-anthropic',   // 'backend' 에서 이걸로 변경
+  ...
   MODE: 'direct-anthropic',   
   // [backend 모드] 내가 배포한 서버리스 함수 경로
   BACKEND_URL: '/api/analyze',
